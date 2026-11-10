@@ -1,38 +1,764 @@
-.App {
-  text-align: center;
+/* =========================
+   RESET
+========================= */
+
+* {
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+html {
+  scroll-behavior: smooth;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+body {
+  margin: 0;
+  padding: 0;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  background: #f5f3ef;
+  color: #171717;
+
+  overflow-x: hidden;
 }
 
-.App-header {
-  background-color: #282c34;
+button,
+a {
+  font-family: inherit;
+}
+
+
+/* =========================
+   ESTRUCTURA PRINCIPAL
+========================= */
+
+.app {
   min-height: 100vh;
+  width: 100%;
+
+  display: flex;
+}
+
+
+/* =========================
+   SIDEBAR
+========================= */
+
+.sidebar {
+  position: fixed;
+
+  left: 0;
+  top: 0;
+
+  width: 260px;
+  height: 100vh;
+
+  padding: 35px 30px;
+
   display: flex;
   flex-direction: column;
-  align-items: center;
+
+  border-right: 1px solid #171717;
+
+  background: #f5f3ef;
+
+  z-index: 100;
+}
+
+
+/* =========================
+   LOGO
+========================= */
+
+.logo {
+  width: 100%;
+}
+
+.logo img {
+  display: block;
+
+  width: 100%;
+  max-width: 40px;
+
+  height: auto;
+
+  align-content: center;
+}
+
+
+/* =========================
+   MENÚ
+========================= */
+
+.menu {
+  margin-top: auto;
+  margin-bottom: auto;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 15px;
+}
+
+.menu a {
+  width: fit-content;
+
+  color: #171717;
+
+  text-decoration: none;
+
+  font-size: 14px;
+  font-weight: 400;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.5px;
+
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
+}
+
+.menu a:hover {
+  opacity: 0.45;
+  transform: translateX(5px);
+}
+
+
+/* =========================
+   FIRMA
+========================= */
+
+.firma {
+  width: 150px;
+
+  margin-left: 50px;
+}
+
+.firma img {
+  display: block;
+
+  width: 50%;
+  height: auto;
+}
+
+
+/* =========================
+   CONTENIDO
+========================= */
+
+.content {
+  width: calc(100% - 260px);
+
+  min-height: 100vh;
+
+  margin-left: 260px;
+}
+
+
+/* =========================
+   HERO / INICIO
+========================= */
+
+.hero {
+  min-height: 100vh;
+
+  padding: clamp(40px, 8vw, 120px);
+
+  display: flex;
+  flex-direction: column;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.small-title {
+  margin: 0 0 40px;
+
+  font-size: 12px;
+
+  letter-spacing: 2px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.hero h1 {
+  max-width: 1000px;
+
+  margin: 0;
+
+  font-size: clamp(48px, 7vw, 110px);
+
+  line-height: 0.95;
+
+  font-weight: 400;
+
+  letter-spacing: clamp(-5px, -0.4vw, -2px);
+}
+
+.description {
+  max-width: 450px;
+
+  margin-top: 45px;
+
+  font-size: clamp(16px, 1.4vw, 19px);
+
+  line-height: 1.5;
+}
+
+.hero-button {
+  width: fit-content;
+
+  margin-top: 35px;
+
+  padding: 14px 22px;
+
+  border: 1px solid #171717;
+
+  background: transparent;
+
+  color: #171717;
+
+  font-size: 14px;
+
+  cursor: pointer;
+
+  transition:
+    background 0.25s ease,
+    color 0.25s ease;
+}
+
+.hero-button:hover {
+  background: #171717;
+
+  color: #f5f3ef;
+}
+
+
+/* =========================
+   CABECERA MÓVIL
+========================= */
+
+.mobile-header {
+  display: none;
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 900px) {
+
+  .sidebar {
+    width: 220px;
+
+    padding: 30px 24px;
   }
-  to {
-    transform: rotate(360deg);
+
+  .content {
+    width: calc(100% - 220px);
+
+    margin-left: 220px;
   }
+
+  .logo img {
+    max-width: 170px;
+  }
+
+  .firma {
+    width: 130px;
+
+    margin-left: 10px;
+  }
+
+  .hero {
+    padding: 60px 50px;
+  }
+
+}
+
+
+/* =========================
+   MÓVIL
+========================= */
+
+@media (max-width: 700px) {
+
+  /* La sidebar deja de ocupar espacio */
+  .sidebar {
+    position: fixed;
+
+    width: 100%;
+    height: 100vh;
+
+    padding: 110px 35px 35px;
+
+    border-right: none;
+
+    transform: translateX(-100%);
+
+    transition: transform 0.4s ease;
+
+    justify-content: flex-start;
+  }
+
+  /* Menú abierto */
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+
+  /* Ocultamos el logo de la sidebar */
+  .sidebar .logo {
+    display: none;
+  }
+
+
+  /* Menú móvil */
+  .menu {
+    margin: auto 0;
+
+    gap: 22px;
+  }
+
+  .menu a {
+    font-size: 22px;
+
+    letter-spacing: 0;
+  }
+
+
+  /* Firma */
+  .firma {
+    width: 150px;
+
+    margin-left: auto;
+    margin-right: 5px;
+  }
+
+
+  /* Cabecera */
+  .mobile-header {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 80px;
+
+    padding: 20px 25px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    background: #f5f3ef;
+
+    border-bottom: 1px solid #171717;
+
+    z-index: 200;
+  }
+
+
+  /* Logo móvil */
+  .mobile-logo {
+    width: 160px;
+  }
+
+  .mobile-logo img {
+    width: 100%;
+    height: auto;
+
+    display: block;
+  }
+
+
+  /* Botón hamburguesa */
+  .menu-button {
+    width: 42px;
+    height: 42px;
+
+    padding: 0;
+
+    border: none;
+
+    background: transparent;
+
+    color: #171717;
+
+    font-size: 30px;
+
+    line-height: 1;
+
+    cursor: pointer;
+  }
+
+
+  /* Contenido */
+  .content {
+    width: 100%;
+
+    margin-left: 0;
+
+    min-height: 100vh;
+  }
+
+
+  /* Hero */
+  .hero {
+    min-height: 100vh;
+
+    padding:
+      120px
+      25px
+      60px;
+  }
+
+  .small-title {
+    margin-bottom: 30px;
+
+    font-size: 11px;
+  }
+
+  .hero h1 {
+    font-size: clamp(44px, 13vw, 72px);
+
+    letter-spacing: -3px;
+
+    line-height: 0.95;
+  }
+
+  .description {
+    max-width: 90%;
+
+    margin-top: 35px;
+
+    font-size: 16px;
+  }
+
+  .hero-button {
+    margin-top: 30px;
+
+    padding: 13px 18px;
+  }
+
+}
+
+
+/* =========================
+   MÓVILES PEQUEÑOS
+========================= */
+
+@media (max-width: 400px) {
+
+  .mobile-header {
+    height: 70px;
+
+    padding: 16px 20px;
+  }
+
+  .mobile-logo {
+    width: 140px;
+  }
+
+  .hero {
+    padding:
+      100px
+      20px
+      50px;
+  }
+
+  .hero h1 {
+    font-size: 42px;
+
+    letter-spacing: -2px;
+  }
+
+  .menu a {
+    font-size: 20px;
+  }
+
+  .firma {
+    width: 130px;
+  }
+
+}
+
+/* =========================
+   BANNER DE COOKIES
+========================= */
+
+.cookie-banner {
+  position: fixed;
+
+  left: 30px;
+  right: 30px;
+  bottom: 25px;
+
+  z-index: 1000;
+
+  display: flex;
+  align-items: center;
+  gap: 30px;
+
+  padding: 30px 45px;
+
+  background: #f5f3ef;
+  color: #171717;
+
+  border: 1px solid #171717;
+
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.12);
+}
+
+
+/* ICONO */
+
+.cookie-icon {
+  flex-shrink: 0;
+
+  font-size: 42px;
+}
+
+
+/* CONTENIDO */
+
+.cookie-content {
+  flex: 1;
+}
+
+.cookie-content h2 {
+  margin: 0 0 10px;
+
+  font-size: 24px;
+  font-weight: 400;
+}
+
+.cookie-content p {
+  max-width: 650px;
+
+  margin: 0 0 10px;
+
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.cookie-content a {
+  color: #171717;
+
+  font-size: 13px;
+
+  text-decoration: underline;
+}
+
+
+/* BOTONES */
+
+.cookie-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  flex-shrink: 0;
+}
+
+.cookie-actions button {
+  padding: 13px 18px;
+
+  border: 1px solid #171717;
+
+  background: transparent;
+
+  color: #171717;
+
+  font-size: 13px;
+
+  cursor: pointer;
+
+  white-space: nowrap;
+
+  transition:
+    opacity 0.2s ease,
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.cookie-actions button:hover {
+  opacity: 0.65;
+}
+
+
+/* ACEPTAR */
+
+.cookie-accept {
+  background: #171717 !important;
+  color: #f5f3ef !important;
+}
+
+
+/* CERRAR */
+
+.cookie-close {
+  position: absolute;
+
+  top: 10px;
+  right: 14px;
+
+  padding: 0;
+
+  border: none;
+
+  background: transparent;
+
+  color: #171717;
+
+  font-size: 24px;
+
+  line-height: 1;
+
+  cursor: pointer;
+}
+
+
+/* =========================
+   COOKIES - TABLET
+========================= */
+
+@media (max-width: 900px) {
+
+  .cookie-banner {
+    left: 20px;
+    right: 20px;
+
+    gap: 20px;
+
+    padding: 25px 30px;
+  }
+
+  .cookie-icon {
+    font-size: 35px;
+  }
+
+  .cookie-content h2 {
+    font-size: 20px;
+  }
+
+  .cookie-content p {
+    font-size: 13px;
+  }
+
+  .cookie-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .cookie-actions button {
+    width: 100%;
+  }
+
+}
+
+
+/* =========================
+   COOKIES - MÓVIL
+========================= */
+
+@media (max-width: 700px) {
+
+  .cookie-banner {
+    left: 15px;
+    right: 15px;
+    bottom: 15px;
+
+    display: block;
+
+    padding: 25px 20px;
+  }
+
+
+  .cookie-icon {
+    display: none;
+  }
+
+
+  .cookie-content {
+    padding-right: 10px;
+  }
+
+
+  .cookie-content h2 {
+    padding-right: 20px;
+
+    margin-bottom: 10px;
+
+    font-size: 21px;
+  }
+
+
+  .cookie-content p {
+    margin-bottom: 10px;
+
+    font-size: 13px;
+
+    line-height: 1.45;
+  }
+
+
+  .cookie-content a {
+    font-size: 12px;
+  }
+
+
+  .cookie-actions {
+    margin-top: 20px;
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 8px;
+  }
+
+
+  .cookie-actions button {
+    width: 100%;
+
+    padding: 12px 8px;
+
+    font-size: 12px;
+  }
+
+
+  .cookie-accept {
+    grid-column: span 2;
+  }
+
+}
+
+
+/* =========================
+   COOKIES - MÓVIL PEQUEÑO
+========================= */
+
+@media (max-width: 400px) {
+
+  .cookie-banner {
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+
+    padding: 22px 17px;
+  }
+
+  .cookie-content h2 {
+    font-size: 19px;
+  }
+
+  .cookie-content p {
+    font-size: 12px;
+  }
+
+  .cookie-actions button {
+    font-size: 11px;
+  }
+  
 }
